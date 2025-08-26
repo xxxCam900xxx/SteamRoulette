@@ -1,0 +1,3 @@
+name: SteamRoulette
+include:
+  - ./compose.web.yaml
