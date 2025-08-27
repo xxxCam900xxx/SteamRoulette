@@ -87,7 +87,7 @@ footer p {
 }
 
 .logout {
-    position: fixed;
+    position: absolute;
     top: 10px;
     right: 10px;
     background-color: #3D3D3D;
@@ -193,10 +193,11 @@ footer p {
     flex-direction: column;
     gap: 10px;
     text-align: start;
-    width: 500px;
+    max-width: 500px;
+    width: 100%;
 }
 
-#result > div {
+#result>div {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -219,6 +220,7 @@ footer p {
     width: 100%;
     border-radius: 10px;
     margin-top: 10px;
+    object-fit: contain;
 }
 
 /* AAAAAAAAAAAA */
@@ -287,4 +289,67 @@ footer p {
 
 .profileCard button i {
     font-size: 3rem;
+}
+
+@media(max-width: 1440px) {
+    .balken {
+        width: 500px;
+        height: 100px;
+        background: #FF3131;
+        background: linear-gradient(90deg, rgba(255, 49, 49, 1) 0%, rgba(255, 145, 77, 1) 100%);
+        position: fixed;
+        z-index: -1;
+    }
+
+    main {
+        justify-content: center;
+    }
+
+    body {
+        padding: 75px 10% 20px 10%;
+    }
+
+    #left-1,
+    #left-2 {
+        display: none;
+    }
+
+    #right-1,
+    #right-2 {
+        transform: rotate(-45deg);
+    }
+
+    #right-1 {
+        top: 50px;
+        left: -200px;
+    }
+
+    #right-2 {
+        top: 150px;
+        left: -175px;
+        width: 700px;
+    }
+
+    .profileCard .content {
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .profileCard {
+        height: fit-content;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .profileCard button {
+        flex-direction: row-reverse;
+        width: 100%;
+        height: fit-content;
+        justify-content: space-between;
+        aspect-ratio: auto;
+    }
+
+    .roulette-container {
+        transform: scale(1.5);
+    }
 }

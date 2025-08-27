@@ -70,7 +70,7 @@ if (isset($_POST['userinput'])) {
     <main>
         <img src="./images/SteamRoulette Banner.png" alt="SteamRoulette Logo" class="logo">
         <p class="description">
-            SteamRoulette hilft dir, das nächste Spiel aus deiner Steam-Bibliothek zu finden.<br>
+            SteamRoulette hilft dir, das nächste Spiel aus deiner Steam-Bibliothek zu finden.
             Melde dich mit deinem Steam-Account an oder gib deine SteamID bzw. deinen Profilnamen ein!
         </p>
 
