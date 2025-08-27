@@ -32,6 +32,14 @@ img {
     border-radius: 20px;
 }
 
+input {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    background-color: #3D3D3D;
+}
+
 main {
     min-height: 5em;
     flex: 1;
@@ -39,6 +47,7 @@ main {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    gap: 10px;
 }
 
 main img {
@@ -52,6 +61,17 @@ footer {
     gap: 5px;
     align-items: center;
     text-align: center;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .description {
