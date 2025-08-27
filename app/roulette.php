@@ -26,6 +26,7 @@ $games = $gamesData['response']['games'] ?? [];
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SteamRoulette</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -58,7 +59,7 @@ $games = $gamesData['response']['games'] ?? [];
                 <div class="roulette-track" id="roulette-track"></div>
                 <div class="roulette-line"></div>
             </div>
-            <div id="result" class="hidden"></div>
+            <div id="result" class="hidden tinyResult"></div>
         <?php else: ?>
             <p>⚠ Keine Spiele gefunden. Stelle sicher, dass deine Bibliothek öffentlich ist!</p>
         <?php endif; ?>

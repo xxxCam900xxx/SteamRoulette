@@ -3,7 +3,7 @@ error_reporting(E_ALL & ~E_DEPRECATED);
 require 'openid.php';
 session_start();
 
-$apiKey = getenv("STEAM_KEY"); // <-- deinen Steam API Key hier eintragen
+$apiKey = getenv("STEAM_KEY");
 $openid = new LightOpenID('steam.xrayzu.com'); // deine Domain
 
 // --- Login mit Steam OpenID ---
@@ -62,6 +62,7 @@ if (isset($_POST['userinput'])) {
 <html lang="de">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SteamRoulette</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">

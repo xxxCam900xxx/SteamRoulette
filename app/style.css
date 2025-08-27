@@ -48,6 +48,7 @@ main {
     align-items: center;
     text-align: center;
     gap: 10px;
+    overflow: hidden;
 }
 
 main img {
@@ -152,7 +153,7 @@ footer p {
 .roulette-container {
     position: relative;
     margin-top: 70px;
-    width: 700px;
+    max-width: 700px;
     overflow: hidden;
 }
 
@@ -193,8 +194,14 @@ footer p {
     flex-direction: column;
     gap: 10px;
     text-align: start;
-    max-width: 500px;
     width: 100%;
+    max-width: 500px;
+}
+
+@media (max-width: 800px) {
+    #result {
+        max-width: 100% !important;
+    }
 }
 
 #result>div {
@@ -292,17 +299,9 @@ footer p {
 }
 
 @media(max-width: 1440px) {
-    .balken {
-        width: 500px;
-        height: 100px;
-        background: #FF3131;
-        background: linear-gradient(90deg, rgba(255, 49, 49, 1) 0%, rgba(255, 145, 77, 1) 100%);
-        position: fixed;
-        z-index: -1;
-    }
-
     main {
         justify-content: center;
+        height: fit-content;
     }
 
     body {
