@@ -29,6 +29,9 @@ $games = $gamesData['response']['games'] ?? [];
     <title>SteamRoulette</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <style>
+        .hidden { display: none; }
+    </style>
 </head>
 
 <body>
@@ -43,7 +46,7 @@ $games = $gamesData['response']['games'] ?? [];
                     </div>
                 </div>
                 <?php if (!empty($games)): ?>
-                    <button onclick="spin()"><i class="fa-solid fa-arrows-spin"></i> Spin!</button>
+                    <button id="spinBtn" onclick="spin()"><i class="fa-solid fa-arrows-spin"></i> Spin!</button>
                 <?php endif; ?>
             <?php else: ?>
                 <p>⚠ Profil konnte nicht geladen werden.</p>
@@ -51,11 +54,11 @@ $games = $gamesData['response']['games'] ?? [];
         </div>
 
         <?php if (!empty($games)): ?>
-            <div class="roulette-container">
+            <div class="roulette-container" id="roulette-container">
                 <div class="roulette-track" id="roulette-track"></div>
                 <div class="roulette-line"></div>
             </div>
-            <div id="result"></div>
+            <div id="result" class="hidden"></div>
         <?php else: ?>
             <p>⚠ Keine Spiele gefunden. Stelle sicher, dass deine Bibliothek öffentlich ist!</p>
         <?php endif; ?>
@@ -84,7 +87,6 @@ $games = $gamesData['response']['games'] ?? [];
         function renderGames() {
             const track = document.getElementById("roulette-track");
             track.innerHTML = "";
-            // Duplizieren für genug "Laufbahn"
             for (let i = 0; i < 8; i++) {
                 games.forEach(g => {
                     let card = document.createElement("div");
@@ -102,32 +104,65 @@ $games = $gamesData['response']['games'] ?? [];
             if (!games.length) return;
 
             const track = document.getElementById("roulette-track");
+            const rouletteContainer = document.getElementById("roulette-container");
+            const resultDiv = document.getElementById("result");
 
-            // 1. Einmal zufälliges Game wählen
+            // Ansicht zurücksetzen
+            rouletteContainer.classList.remove("hidden");
+            resultDiv.classList.add("hidden");
+            resultDiv.innerHTML = "";
+
+            // --- Wichtig: Animation reset ---
+            track.style.transition = "none";
+            track.style.transform = "translateX(0)";
+            void track.offsetHeight; // Force Reflow
+
+            // Zufälliges Spiel wählen
             chosenIndex = Math.floor(Math.random() * games.length);
             let chosen = games[chosenIndex];
 
-            // 2. Zielposition berechnen (mit Extra-Runden für "Spannung")
-            let rounds = 3; // wie oft sich das Rad dreht
+            let rounds = 3;
             let stopIndex = games.length * rounds + chosenIndex;
-            let offset = -(stopIndex * cardWidth) + (350 - cardWidth / 2); // 350 = Hälfte von 700px container
+            let offset = -(stopIndex * cardWidth) + (350 - cardWidth / 2);
 
-            // 3. Animation starten
-            track.style.transition = "transform 4s cubic-bezier(0.25, 1, 0.5, 1)";
-            track.style.transform = `translateX(${offset}px)`;
-
-            // 4. Nach Animation → Ergebnis anzeigen
+            // Neue Animation starten
             setTimeout(() => {
-                document.getElementById("result").innerHTML = `
-                    <h2>${chosen.name}</h2>
-                    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/${chosen.appid}/header.jpg" alt="${chosen.name}">
-                    <p>Spielzeit: ${(chosen.playtime_forever/60).toFixed(1)} Std.</p>
-                `;
+                track.style.transition = "transform 4s cubic-bezier(0.25, 1, 0.5, 1)";
+                track.style.transform = `translateX(${offset}px)`;
+            }, 50);
+
+            setTimeout(() => {
+                fetch(`gameinfo.php?appid=${chosen.appid}`)
+                    .then(res => res.json())
+                    .then(info => {
+                        // Roulette ausblenden, Ergebnis zeigen
+                        rouletteContainer.classList.add("hidden");
+                        resultDiv.classList.remove("hidden");
+
+                        resultDiv.innerHTML = `                      
+<img src="https://cdn.cloudflare.steamstatic.com/steam/apps/${chosen.appid}/header.jpg" alt="GameImage">
+<div>
+    <div class="gameInfo">
+        <h1>${chosen.name}</h1>
+        <p>${info.description}</p>
+    </div>
+    <div class="userDetails">
+        <p><strong>Spielzeit:</strong> ${(chosen.playtime_forever/60).toFixed(1)} Std.</p>
+        <p><strong>Achievements:</strong> ${info.achievements.achieved}/${info.achievements.total}
+            (${info.achievements.missing} fehlen)</p>
+    </div>
+    <div class="gameDetails">
+        <p><strong>Release:</strong> ${info.release_date}</p>
+        <p><strong>Entwickler:</strong> ${info.developers?.join(", ")}</p>
+        <p><strong>Publisher:</strong> ${info.publishers?.join(", ")}</p>
+    </div>
+</div>
+                        `;
+                    });
             }, 4200);
         }
 
         renderGames();
     </script>
 </body>
-
 </html>

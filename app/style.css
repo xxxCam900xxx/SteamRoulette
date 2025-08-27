@@ -78,6 +78,10 @@ form {
     margin-bottom: 3rem;
 }
 
+footer {
+    margin-top: 50px;
+}
+
 footer p {
     color: rgb(145, 145, 145);
 }
@@ -178,17 +182,41 @@ footer p {
     bottom: 0;
     left: 50%;
     width: 3px;
-    background: red;
+    background: #565656;
     transform: translateX(-50%);
 }
 
 #result {
     margin-top: 30px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: start;
+    width: 500px;
+}
+
+#result > div {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#result h1 {
+    font-size: 2rem;
+}
+
+#result .userDetails {
+    font-size: 1.5rem;
+}
+
+#result p {
+    color: rgb(145, 145, 145);
 }
 
 #result img {
-    max-width: 500px;
+    max-width: 100%;
+    width: 100%;
     border-radius: 10px;
     margin-top: 10px;
 }
