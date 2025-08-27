@@ -55,4 +55,4 @@ Bei Fragen oder Anregungen:
 
 ---
 
-[![GitHub stars](https://img.shields.io/github/stars/xxxCam900xxx/Phaedra?style=social)](https://github.com/xxxCam900xxx/Phaedra/stargazers) [![GitHub forks](https://img.shields.io/github/forks/xxxCam900xxx/Phaedra?style=social)](https://github.com/xxxCam900xxx/Phaedra/network)
+[![GitHub stars](https://img.shields.io/github/stars/xxxCam900xxx/SteamRoulette?style=social)](https://github.com/xxxCam900xxx/SteamRoulette/stargazers) [![GitHub forks](https://img.shields.io/github/forks/xxxCam900xxx/SteamRoulette?style=social)](https://github.com/xxxCam900xxx/SteamRoulette/network)
